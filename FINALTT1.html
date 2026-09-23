@@ -27,12 +27,75 @@
     line-height:1.6;
     overflow-x:hidden;
   }
+  body.intro-lock{overflow:hidden; height:100vh;}
   h1,h2,h3,h4,.display{font-family:'Space Grotesk',sans-serif;}
   a{color:inherit; text-decoration:none;}
   img{max-width:100%; display:block;}
   .wrap{max-width:1180px; margin:0 auto; padding:0 32px;}
   section{padding:110px 0;}
   @media (max-width:720px){section{padding:70px 0;} .wrap{padding:0 20px;}}
+
+  /* ---------- Intro Splash Banner ---------- */
+  .intro-splash{
+    position:fixed; inset:0; z-index:99999;
+    display:flex; align-items:center; justify-content:center;
+    background:#000;
+    overflow:hidden;
+    cursor:pointer;
+    transition:opacity .7s ease;
+  }
+  .intro-splash.closing{opacity:0; pointer-events:none;}
+  .intro-blur-bg{
+    position:absolute; inset:-40px;
+    background-size:cover;
+    background-position:center;
+    filter:blur(38px) brightness(.45) saturate(1.1);
+    transform:scale(1.15);
+    transition:transform .9s ease, opacity .9s ease;
+  }
+  .intro-splash.closing .intro-blur-bg{transform:scale(1.3); opacity:0;}
+  .intro-banner{
+    position:relative;
+    width:min(92vw, 1100px);
+    aspect-ratio:3240 / 1350;
+    max-height:82vh;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 30px 90px rgba(0,0,0,.65), 0 0 0 1px rgba(255,255,255,.08);
+    background:var(--panel);
+    transform:scale(1);
+    opacity:1;
+    transition:transform .6s cubic-bezier(.4,0,.2,1), opacity .6s ease;
+  }
+  .intro-splash.closing .intro-banner{transform:scale(1.06); opacity:0;}
+  .intro-banner img{
+    width:100%; height:100%; object-fit:cover; object-position:center;
+    display:block;
+  }
+  .intro-hint{
+    position:absolute; left:0; right:0; bottom:16px;
+    text-align:center;
+    color:#fff;
+    font-family:'Space Grotesk',sans-serif;
+    font-size:.85rem;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    opacity:.9;
+    text-shadow:0 2px 10px rgba(0,0,0,.6);
+    animation:introPulse 1.8s ease-in-out infinite;
+    pointer-events:none;
+  }
+  @keyframes introPulse{
+    0%,100%{opacity:.55; transform:translateY(0);}
+    50%{opacity:1; transform:translateY(-3px);}
+  }
+  @media (max-width:640px){
+    .intro-banner{width:94vw; max-height:78vh; border-radius:12px;}
+    .intro-hint{font-size:.72rem; bottom:10px;}
+  }
+  @media (orientation:portrait) and (max-width:640px){
+    .intro-banner{width:94vw;}
+  }
 
   /* ---------- Starfield ---------- */
   #stars{position:fixed; inset:0; z-index:0; pointer-events:none;}
@@ -420,9 +483,18 @@
   }
 </style>
 </head>
-<body>
+<body class="intro-lock">
+
+<div class="intro-splash" id="introSplash" role="dialog" aria-modal="true" aria-label="Team Titans welcome banner">
+  <div class="intro-blur-bg" id="introBlurBg" style="background-image:url('BANNER.jpg');"></div>
+  <div class="intro-banner" id="introBanner" tabindex="0">
+    <img src="INSTA POSTER.png" alt="Team Titans Banner" width="3240" height="1350">
+    <div class="intro-hint">Tap anywhere to enter</div>
+  </div>
+</div>
 
 <canvas id="stars"></canvas>
+</canvas>
 
 <header>
   <div class="wrap nav">
@@ -441,11 +513,11 @@
 
 <div class="ticker">
   <div class="ticker-track">
-    <span>🚀 Team Titans • IRoC-U 2026 Result • <a href="https://www.instagram.com/reel/DcAsaqNt774/?stkn=cG40ZmVoYnhkNGc3">Click Here</a></span>
-    <span>🚀 Team Titans • IRoC-U 2026 Result • <a href="https://www.instagram.com/reel/DcAsaqNt774/?stkn=cG40ZmVoYnhkNGc3">Click Here</a></span>
-    <span>🚀 Team Titans • IRoC-U 2026 Result • <a href="https://www.instagram.com/reel/DcAsaqNt774/?stkn=cG40ZmVoYnhkNGc3">Click Here</a></span>
-    <span>🚀 Team Titans • IRoC-U 2026 Result • <a href="https://www.instagram.com/reel/DcAsaqNt774/?stkn=cG40ZmVoYnhkNGc3">Click Here</a></span>
-    <span>🚀 Team Titans • IRoC-U 2026 Result • <a href="https://www.instagram.com/reel/DcAsaqNt774/?stkn=cG40ZmVoYnhkNGc3">Click Here</a></span>
+    <span>🚀 Team Titans • IRoC-U 2026 Result • <a href="https://www.instagram.com/reel/DcAsaqNt774/?stkn=cG40ZmVoYnhkNGc3" target="_blank" rel="noopener noreferrer">Click Here</a></span>
+    <span>🚀 Team Titans • IRoC-U 2026 Result • <a href="https://www.instagram.com/reel/DcAsaqNt774/?stkn=cG40ZmVoYnhkNGc3" target="_blank" rel="noopener noreferrer">Click Here</a></span>
+    <span>🚀 Team Titans • IRoC-U 2026 Result • <a href="https://www.instagram.com/reel/DcAsaqNt774/?stkn=cG40ZmVoYnhkNGc3" target="_blank" rel="noopener noreferrer">Click Here</a></span>
+    <span>🚀 Team Titans • IRoC-U 2026 Result • <a href="https://www.instagram.com/reel/DcAsaqNt774/?stkn=cG40ZmVoYnhkNGc3" target="_blank" rel="noopener noreferrer">Click Here</a></span>
+    <span>🚀 Team Titans • IRoC-U 2026 Result • <a href="https://www.instagram.com/reel/DcAsaqNt774/?stkn=cG40ZmVoYnhkNGc3" target="_blank" rel="noopener noreferrer">Click Here</a></span>
   </div>
 </div>
 
@@ -621,43 +693,43 @@
         <div class="member" data-quote="We don't just build robots, we build the patience to debug them at 3am.">
         <div class="photo"><img src="ANUSHKA.png" alt="Anushka Gupta" loading="lazy"></div><h4>Anushka Gupta</h4>
         <div class="socials">
-          <a href="https://www.instagram.com/__anushkagupta17?stkn=NHQ2cG1ydXR1aXJ4" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm0 2h10c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3zm11 1.5a1 1 0 100 2 1 1 0 000-2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6z"/></svg></a>
-          <a href="https://www.linkedin.com/in/-anushka-gupta?utm_source=share_via&utm_content=profile&utm_medium=member_android" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.49 6S0 4.88 0 3.5 1.11 1 2.49 1s2.49 1.12 2.49 2.5zM.5 8.75h4V23h-4V8.75zM8.5 8.75h3.83v1.96h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V23h-4v-6.63c0-1.58-.03-3.6-2.2-3.6-2.2 0-2.54 1.72-2.54 3.49V23h-4V8.75z"/></svg></a>
+          <a href="https://www.instagram.com/__anushkagupta17?stkn=NHQ2cG1ydXR1aXJ4" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm0 2h10c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3zm11 1.5a1 1 0 100 2 1 1 0 000-2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6z"/></svg></a>
+          <a href="https://www.linkedin.com/in/-anushka-gupta?utm_source=share_via&utm_content=profile&utm_medium=member_android" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.49 6S0 4.88 0 3.5 1.11 1 2.49 1s2.49 1.12 2.49 2.5zM.5 8.75h4V23h-4V8.75zM8.5 8.75h3.83v1.96h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V23h-4v-6.63c0-1.58-.03-3.6-2.2-3.6-2.2 0-2.54 1.72-2.54 3.49V23h-4V8.75z"/></svg></a>
         </div>
       </div>
       <div class="member" data-quote="Being a Titan means treating every setback as the next design iteration.">
         <div class="photo"><img src="AMAN.png" alt="Aman Sharma" loading="lazy"></div><h4>Aman Sharma</h4>
         <div class="socials">
-          <a href="https://www.instagram.com/aman_sharma_0_0?stkn=MTBvZmsyamhvZ2Ixeg==" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm0 2h10c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3zm11 1.5a1 1 0 100 2 1 1 0 000-2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6z"/></svg></a>
-          <a href="https://www.linkedin.com/in/aman-sharma-a17550427?utm_source=share_via&utm_content=profile&utm_medium=member_android" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.49 6S0 4.88 0 3.5 1.11 1 2.49 1s2.49 1.12 2.49 2.5zM.5 8.75h4V23h-4V8.75zM8.5 8.75h3.83v1.96h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V23h-4v-6.63c0-1.58-.03-3.6-2.2-3.6-2.2 0-2.54 1.72-2.54 3.49V23h-4V8.75z"/></svg></a>
+          <a href="https://www.instagram.com/aman_sharma_0_0?stkn=MTBvZmsyamhvZ2Ixeg==" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm0 2h10c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3zm11 1.5a1 1 0 100 2 1 1 0 000-2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6z"/></svg></a>
+          <a href="https://www.linkedin.com/in/aman-sharma-a17550427?utm_source=share_via&utm_content=profile&utm_medium=member_android" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.49 6S0 4.88 0 3.5 1.11 1 2.49 1s2.49 1.12 2.49 2.5zM.5 8.75h4V23h-4V8.75zM8.5 8.75h3.83v1.96h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V23h-4v-6.63c0-1.58-.03-3.6-2.2-3.6-2.2 0-2.54 1.72-2.54 3.49V23h-4V8.75z"/></svg></a>
         </div>
       </div>
       <div class="member" data-quote="Titans gave me a place where curiosity is the only prerequisite.">
         <div class="photo"><img src="MANTHAN.png" alt="Manthan Mowale" loading="lazy"></div><h4>Manthan Mowale</h4>
         <div class="socials">
-          <a href="https://www.instagram.com/manthan.74?stkn=YXZrN3hsazB3dzdo" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm0 2h10c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3zm11 1.5a1 1 0 100 2 1 1 0 000-2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6z"/></svg></a>
-          <a href="https://www.linkedin.com/in/manthanmowale?utm_source=share_via&utm_content=profile&utm_medium=member_android" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.49 6S0 4.88 0 3.5 1.11 1 2.49 1s2.49 1.12 2.49 2.5zM.5 8.75h4V23h-4V8.75zM8.5 8.75h3.83v1.96h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V23h-4v-6.63c0-1.58-.03-3.6-2.2-3.6-2.2 0-2.54 1.72-2.54 3.49V23h-4V8.75z"/></svg></a>
+          <a href="https://www.instagram.com/manthan.74?stkn=YXZrN3hsazB3dzdo" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm0 2h10c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3zm11 1.5a1 1 0 100 2 1 1 0 000-2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6z"/></svg></a>
+          <a href="https://www.linkedin.com/in/manthanmowale?utm_source=share_via&utm_content=profile&utm_medium=member_android" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.49 6S0 4.88 0 3.5 1.11 1 2.49 1s2.49 1.12 2.49 2.5zM.5 8.75h4V23h-4V8.75zM8.5 8.75h3.83v1.96h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V23h-4v-6.63c0-1.58-.03-3.6-2.2-3.6-2.2 0-2.54 1.72-2.54 3.49V23h-4V8.75z"/></svg></a>
         </div>
       </div>
       <div class="member" data-quote="Every challenge round is just another excuse to out-engineer yesterday's version of us.">
         <div class="photo"><img src="AYUSH.png" alt="Ayush Rodekar" loading="lazy"></div><h4>Ayush Rodekar</h4>
         <div class="socials">
-          <a href="https://www.instagram.com/ayushrodekar2006?stkn=MWhjNG01eTh3aTZkag==" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm0 2h10c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3zm11 1.5a1 1 0 100 2 1 1 0 000-2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6z"/></svg></a>
-          <a href="https://www.linkedin.com/in/ayush-rodekar-7a2554329?utm_source=share_via&utm_content=profile&utm_medium=member_android" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.49 6S0 4.88 0 3.5 1.11 1 2.49 1s2.49 1.12 2.49 2.5zM.5 8.75h4V23h-4V8.75zM8.5 8.75h3.83v1.96h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V23h-4v-6.63c0-1.58-.03-3.6-2.2-3.6-2.2 0-2.54 1.72-2.54 3.49V23h-4V8.75z"/></svg></a>
+          <a href="https://www.instagram.com/ayushrodekar2006?stkn=MWhjNG01eTh3aTZkag==" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm0 2h10c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3zm11 1.5a1 1 0 100 2 1 1 0 000-2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6z"/></svg></a>
+          <a href="https://www.linkedin.com/in/ayush-rodekar-7a2554329?utm_source=share_via&utm_content=profile&utm_medium=member_android" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.49 6S0 4.88 0 3.5 1.11 1 2.49 1s2.49 1.12 2.49 2.5zM.5 8.75h4V23h-4V8.75zM8.5 8.75h3.83v1.96h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V23h-4v-6.63c0-1.58-.03-3.6-2.2-3.6-2.2 0-2.54 1.72-2.54 3.49V23h-4V8.75z"/></svg></a>
         </div>
       </div>
       <div class="member" data-quote="Being part of Titans means the win is never just one person's — it's all of ours.">
         <div class="photo"><img src="OM.png" alt="Om Jumle" loading="lazy"></div><h4>Om Jumle</h4>
         <div class="socials">
-          <a href="https://www.instagram.com/om_j_5_?stkn=MW9ydmxjbnBiN2VzdA==" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm0 2h10c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3zm11 1.5a1 1 0 100 2 1 1 0 000-2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6z"/></svg></a>
-          <a href="https://www.linkedin.com/in/om-jumle-508382329?utm_source=share_via&utm_content=profile&utm_medium=member_android" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.49 6S0 4.88 0 3.5 1.11 1 2.49 1s2.49 1.12 2.49 2.5zM.5 8.75h4V23h-4V8.75zM8.5 8.75h3.83v1.96h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V23h-4v-6.63c0-1.58-.03-3.6-2.2-3.6-2.2 0-2.54 1.72-2.54 3.49V23h-4V8.75z"/></svg></a>
+          <a href="https://www.instagram.com/om_j_5_?stkn=MW9ydmxjbnBiN2VzdA==" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm0 2h10c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3zm11 1.5a1 1 0 100 2 1 1 0 000-2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6z"/></svg></a>
+          <a href="https://www.linkedin.com/in/om-jumle-508382329?utm_source=share_via&utm_content=profile&utm_medium=member_android" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.49 6S0 4.88 0 3.5 1.11 1 2.49 1s2.49 1.12 2.49 2.5zM.5 8.75h4V23h-4V8.75zM8.5 8.75h3.83v1.96h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V23h-4v-6.63c0-1.58-.03-3.6-2.2-3.6-2.2 0-2.54 1.72-2.54 3.49V23h-4V8.75z"/></svg></a>
         </div>
       </div>
       <div class="member" data-quote="I joined for the robots and stayed for a team that never settles for 'good enough.'">
         <div class="photo"><img src="SHREYASH.png" alt="Shreyash Khedgarkar" loading="lazy"></div><h4>Shreyash Khedgarkar</h4>
         <div class="socials">
-          <a href="https://www.instagram.com/shreyashrkhedgarkar?stkn=MXFiZWt5ZWh2YzE3eA==" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm0 2h10c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3zm11 1.5a1 1 0 100 2 1 1 0 000-2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6z"/></svg></a>
-          <a href="https://www.linkedin.com/in/shreyash-r-khedgarkar-157175392?utm_source=share_via&utm_content=profile&utm_medium=member_android" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.49 6S0 4.88 0 3.5 1.11 1 2.49 1s2.49 1.12 2.49 2.5zM.5 8.75h4V23h-4V8.75zM8.5 8.75h3.83v1.96h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V23h-4v-6.63c0-1.58-.03-3.6-2.2-3.6-2.2 0-2.54 1.72-2.54 3.49V23h-4V8.75z"/></svg></a>
+          <a href="https://www.instagram.com/shreyashrkhedgarkar?stkn=MXFiZWt5ZWh2YzE3eA==" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm0 2h10c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3zm11 1.5a1 1 0 100 2 1 1 0 000-2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6z"/></svg></a>
+          <a href="https://www.linkedin.com/in/shreyash-r-khedgarkar-157175392?utm_source=share_via&utm_content=profile&utm_medium=member_android" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.49 6S0 4.88 0 3.5 1.11 1 2.49 1s2.49 1.12 2.49 2.5zM.5 8.75h4V23h-4V8.75zM8.5 8.75h3.83v1.96h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V23h-4v-6.63c0-1.58-.03-3.6-2.2-3.6-2.2 0-2.54 1.72-2.54 3.49V23h-4V8.75z"/></svg></a>
         </div>
       </div>
         </div>
@@ -676,64 +748,64 @@
      <div class="member" data-quote="Every failed test run taught us something the datasheet never did.">
         <div class="photo"><img src="SANJYOT.png" alt="Sanjyot Kawale" loading="lazy"></div><h4>Sanjyot Kawale</h4>
         <div class="socials">
-          <a href="https://www.instagram.com/sanjyot_kawale?stkn=MTIxcDFiNDNoZzhmeQ==" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm0 2h10c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3zm11 1.5a1 1 0 100 2 1 1 0 000-2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6z"/></svg></a>
-          <a href="https://www.linkedin.com/in/sanjyot-kawale-189a14132?utm_source=share_via&utm_content=profile&utm_medium=member_android" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.49 6S0 4.88 0 3.5 1.11 1 2.49 1s2.49 1.12 2.49 2.5zM.5 8.75h4V23h-4V8.75zM8.5 8.75h3.83v1.96h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V23h-4v-6.63c0-1.58-.03-3.6-2.2-3.6-2.2 0-2.54 1.72-2.54 3.49V23h-4V8.75z"/></svg></a>
+          <a href="https://www.instagram.com/sanjyot_kawale?stkn=MTIxcDFiNDNoZzhmeQ==" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm0 2h10c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3zm11 1.5a1 1 0 100 2 1 1 0 000-2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6z"/></svg></a>
+          <a href="https://www.linkedin.com/in/sanjyot-kawale-189a14132?utm_source=share_via&utm_content=profile&utm_medium=member_android" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.49 6S0 4.88 0 3.5 1.11 1 2.49 1s2.49 1.12 2.49 2.5zM.5 8.75h4V23h-4V8.75zM8.5 8.75h3.83v1.96h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V23h-4v-6.63c0-1.58-.03-3.6-2.2-3.6-2.2 0-2.54 1.72-2.54 3.49V23h-4V8.75z"/></svg></a>
         </div>
       </div>
       <div class="member" data-quote="Titans isn't a team you join, it's a habit of showing up at 2am for one more debug.">
         <div class="photo"><img src="DEEPANSHU.png" alt="Deepanshu Pise" loading="lazy"></div><h4>Deepanshu Pise</h4>
         <div class="socials">
-          <a href="https://www.instagram.com/deepanshuu.txtt?stkn=OTRoODd1amRqanln" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm0 2h10c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3zm11 1.5a1 1 0 100 2 1 1 0 000-2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6z"/></svg></a>
-          <a href="https://www.linkedin.com/in/deepanshu-pise-6869a72b2?utm_source=share_via&utm_content=profile&utm_medium=member_android" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.49 6S0 4.88 0 3.5 1.11 1 2.49 1s2.49 1.12 2.49 2.5zM.5 8.75h4V23h-4V8.75zM8.5 8.75h3.83v1.96h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V23h-4v-6.63c0-1.58-.03-3.6-2.2-3.6-2.2 0-2.54 1.72-2.54 3.49V23h-4V8.75z"/></svg></a>
+          <a href="https://www.instagram.com/deepanshuu.txtt?stkn=OTRoODd1amRqanln" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm0 2h10c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3zm11 1.5a1 1 0 100 2 1 1 0 000-2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6z"/></svg></a>
+          <a href="https://www.linkedin.com/in/deepanshu-pise-6869a72b2?utm_source=share_via&utm_content=profile&utm_medium=member_android" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.49 6S0 4.88 0 3.5 1.11 1 2.49 1s2.49 1.12 2.49 2.5zM.5 8.75h4V23h-4V8.75zM8.5 8.75h3.83v1.96h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V23h-4v-6.63c0-1.58-.03-3.6-2.2-3.6-2.2 0-2.54 1.72-2.54 3.49V23h-4V8.75z"/></svg></a>
         </div>
       </div>
       <div class="member" data-quote="Every award on our shelf has a hundred small failures hiding behind it.">
         <div class="photo"><img src="1PADMESH.png" alt="Padmesh Kimmatkar" loading="lazy"></div><h4>Padmesh Kimmatkar</h4>
         <div class="socials">
-          <a href="https://www.instagram.com/padmeshkimmatkar?stkn=NXVnMjJjdDRuNnE=" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm0 2h10c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3zm11 1.5a1 1 0 100 2 1 1 0 000-2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6z"/></svg></a>
-          <a href="https://www.linkedin.com/in/padmesh-kimmatkar-73ab472a1?utm_source=share_via&utm_content=profile&utm_medium=member_android" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.49 6S0 4.88 0 3.5 1.11 1 2.49 1s2.49 1.12 2.49 2.5zM.5 8.75h4V23h-4V8.75zM8.5 8.75h3.83v1.96h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V23h-4v-6.63c0-1.58-.03-3.6-2.2-3.6-2.2 0-2.54 1.72-2.54 3.49V23h-4V8.75z"/></svg></a>
+          <a href="https://www.instagram.com/padmeshkimmatkar?stkn=NXVnMjJjdDRuNnE=" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm0 2h10c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3zm11 1.5a1 1 0 100 2 1 1 0 000-2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6z"/></svg></a>
+          <a href="https://www.linkedin.com/in/padmesh-kimmatkar-73ab472a1?utm_source=share_via&utm_content=profile&utm_medium=member_android" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.49 6S0 4.88 0 3.5 1.11 1 2.49 1s2.49 1.12 2.49 2.5zM.5 8.75h4V23h-4V8.75zM8.5 8.75h3.83v1.96h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V23h-4v-6.63c0-1.58-.03-3.6-2.2-3.6-2.2 0-2.54 1.72-2.54 3.49V23h-4V8.75z"/></svg></a>
         </div>
       </div>
        <div class="member" data-quote="I came for the robots, I stayed for the people who never let a problem stay unsolved.">
         <div class="photo"><img src="ASHWINI.png" alt="Ashwini Gajbhiye" loading="lazy"></div><h4>Ashwini Gajbhiye</h4>
         <div class="socials">
-          <a href="https://www.instagram.com/ashwini.gajbhiye.3154?stkn=bWQ1dWx5MHRiM2t3" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm0 2h10c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3zm11 1.5a1 1 0 100 2 1 1 0 000-2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6z"/></svg></a>
-          <a href="https://www.linkedin.com/in/ashwini-gajbhiye-a3669320b?utm_source=share_via&utm_content=profile&utm_medium=member_android" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.49 6S0 4.88 0 3.5 1.11 1 2.49 1s2.49 1.12 2.49 2.5zM.5 8.75h4V23h-4V8.75zM8.5 8.75h3.83v1.96h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V23h-4v-6.63c0-1.58-.03-3.6-2.2-3.6-2.2 0-2.54 1.72-2.54 3.49V23h-4V8.75z"/></svg></a>
+          <a href="https://www.instagram.com/ashwini.gajbhiye.3154?stkn=bWQ1dWx5MHRiM2t3" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm0 2h10c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3zm11 1.5a1 1 0 100 2 1 1 0 000-2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6z"/></svg></a>
+          <a href="https://www.linkedin.com/in/ashwini-gajbhiye-a3669320b?utm_source=share_via&utm_content=profile&utm_medium=member_android" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.49 6S0 4.88 0 3.5 1.11 1 2.49 1s2.49 1.12 2.49 2.5zM.5 8.75h4V23h-4V8.75zM8.5 8.75h3.83v1.96h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V23h-4v-6.63c0-1.58-.03-3.6-2.2-3.6-2.2 0-2.54 1.72-2.54 3.49V23h-4V8.75z"/></svg></a>
         </div>
       </div>
       <div class="member" data-quote="We build like engineers and celebrate like it's launch day, every single time.">
         <div class="photo"><img src="1NEHA.png" alt="Neha Tonge" loading="lazy"></div><h4>Neha Tonge</h4>
         <div class="socials">
-          <a href="https://www.instagram.com/nehatonge_?stkn=MW5qeThteXZieXJ5OA==" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm0 2h10c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3zm11 1.5a1 1 0 100 2 1 1 0 000-2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6z"/></svg></a>
-          <a href="https://www.linkedin.com/in/nehatonge?utm_source=share_via&utm_content=profile&utm_medium=member_android" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.49 6S0 4.88 0 3.5 1.11 1 2.49 1s2.49 1.12 2.49 2.5zM.5 8.75h4V23h-4V8.75zM8.5 8.75h3.83v1.96h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V23h-4v-6.63c0-1.58-.03-3.6-2.2-3.6-2.2 0-2.54 1.72-2.54 3.49V23h-4V8.75z"/></svg></a>
+          <a href="https://www.instagram.com/nehatonge_?stkn=MW5qeThteXZieXJ5OA==" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm0 2h10c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3zm11 1.5a1 1 0 100 2 1 1 0 000-2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6z"/></svg></a>
+          <a href="https://www.linkedin.com/in/nehatonge?utm_source=share_via&utm_content=profile&utm_medium=member_android" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.49 6S0 4.88 0 3.5 1.11 1 2.49 1s2.49 1.12 2.49 2.5zM.5 8.75h4V23h-4V8.75zM8.5 8.75h3.83v1.96h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V23h-4v-6.63c0-1.58-.03-3.6-2.2-3.6-2.2 0-2.54 1.72-2.54 3.49V23h-4V8.75z"/></svg></a>
         </div>
       </div>
       <div class="member" data-quote="The best circuits are the ones you rebuild three times before the deadline.">
         <div class="photo"><img src="1MILIND.png" alt="Milind Late" loading="lazy"></div><h4>Milind Late</h4>
         <div class="socials">
-          <a href="https://www.instagram.com/inevitable_milind?stkn=dHJkMDU5aGF5cWZ3" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm0 2h10c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3zm11 1.5a1 1 0 100 2 1 1 0 000-2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6z"/></svg></a>
-          <a href="https://www.linkedin.com/in/milind-late?utm_source=share_via&utm_content=profile&utm_medium=member_android" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.49 6S0 4.88 0 3.5 1.11 1 2.49 1s2.49 1.12 2.49 2.5zM.5 8.75h4V23h-4V8.75zM8.5 8.75h3.83v1.96h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V23h-4v-6.63c0-1.58-.03-3.6-2.2-3.6-2.2 0-2.54 1.72-2.54 3.49V23h-4V8.75z"/></svg></a>
+          <a href="https://www.instagram.com/inevitable_milind?stkn=dHJkMDU5aGF5cWZ3" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm0 2h10c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3zm11 1.5a1 1 0 100 2 1 1 0 000-2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6z"/></svg></a>
+          <a href="https://www.linkedin.com/in/milind-late?utm_source=share_via&utm_content=profile&utm_medium=member_android" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.49 6S0 4.88 0 3.5 1.11 1 2.49 1s2.49 1.12 2.49 2.5zM.5 8.75h4V23h-4V8.75zM8.5 8.75h3.83v1.96h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V23h-4v-6.63c0-1.58-.03-3.6-2.2-3.6-2.2 0-2.54 1.72-2.54 3.49V23h-4V8.75z"/></svg></a>
         </div>
       </div>
       <div class="member" data-quote="Titans taught me that competitions are won in the weeks nobody's watching.">
         <div class="photo"><img src="1SHLOK.png" alt="Shlok Chaudhari" loading="lazy"></div><h4>Shlok Chaudhari</h4>
         <div class="socials">
-          <a href="https://www.instagram.com/shlok_chaudhari_28?stkn=c2F6YzU0ZnUzajlt" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm0 2h10c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3zm11 1.5a1 1 0 100 2 1 1 0 000-2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6z"/></svg></a>
-          <a href="https://www.linkedin.com/in/shlok-chaudhari?utm_source=share_via&utm_content=profile&utm_medium=member_android" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.49 6S0 4.88 0 3.5 1.11 1 2.49 1s2.49 1.12 2.49 2.5zM.5 8.75h4V23h-4V8.75zM8.5 8.75h3.83v1.96h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V23h-4v-6.63c0-1.58-.03-3.6-2.2-3.6-2.2 0-2.54 1.72-2.54 3.49V23h-4V8.75z"/></svg></a>
+          <a href="https://www.instagram.com/shlok_chaudhari_28?stkn=c2F6YzU0ZnUzajlt" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm0 2h10c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3zm11 1.5a1 1 0 100 2 1 1 0 000-2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6z"/></svg></a>
+          <a href="https://www.linkedin.com/in/shlok-chaudhari?utm_source=share_via&utm_content=profile&utm_medium=member_android" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.49 6S0 4.88 0 3.5 1.11 1 2.49 1s2.49 1.12 2.49 2.5zM.5 8.75h4V23h-4V8.75zM8.5 8.75h3.83v1.96h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V23h-4v-6.63c0-1.58-.03-3.6-2.2-3.6-2.2 0-2.54 1.72-2.54 3.49V23h-4V8.75z"/></svg></a>
         </div>
       </div>
       <div class="member" data-quote="Every wire we solder here is a small bet on doing something bigger than ourselves.">
         <div class="photo"><img src="1TAVISH.png" alt="Tavish Anade" loading="lazy"></div><h4>Tavish Anade</h4>
         <div class="socials">
-          <a href="https://www.instagram.com/_.tavish?stkn=cjVrN3pwdGoxbDR6" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm0 2h10c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3zm11 1.5a1 1 0 100 2 1 1 0 000-2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6z"/></svg></a>
-          <a href="https://www.linkedin.com/in/tavish-anade?utm_source=share_via&utm_content=profile&utm_medium=member_android" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.49 6S0 4.88 0 3.5 1.11 1 2.49 1s2.49 1.12 2.49 2.5zM.5 8.75h4V23h-4V8.75zM8.5 8.75h3.83v1.96h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V23h-4v-6.63c0-1.58-.03-3.6-2.2-3.6-2.2 0-2.54 1.72-2.54 3.49V23h-4V8.75z"/></svg></a>
+          <a href="https://www.instagram.com/_.tavish?stkn=cjVrN3pwdGoxbDR6" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm0 2h10c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3zm11 1.5a1 1 0 100 2 1 1 0 000-2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6z"/></svg></a>
+          <a href="https://www.linkedin.com/in/tavish-anade?utm_source=share_via&utm_content=profile&utm_medium=member_android" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.49 6S0 4.88 0 3.5 1.11 1 2.49 1s2.49 1.12 2.49 2.5zM.5 8.75h4V23h-4V8.75zM8.5 8.75h3.83v1.96h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V23h-4v-6.63c0-1.58-.03-3.6-2.2-3.6-2.2 0-2.54 1.72-2.54 3.49V23h-4V8.75z"/></svg></a>
         </div>
       </div>
       <div class="member" data-quote="I've learned more from our late-night fixes than from any classroom.">
         <div class="photo"><img src="1DHYANESH.png" alt="Dnyanesh Pise" loading="lazy"></div><h4>Dnyanesh Pise</h4>
         <div class="socials">
-          <a href="https://www.instagram.com/dnypi?stkn=c2t2Z3d1OHlhZDhv" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm0 2h10c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3zm11 1.5a1 1 0 100 2 1 1 0 000-2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6z"/></svg></a>
-          <a href="https://www.linkedin.com/in/pise?utm_source=share_via&utm_content=profile&utm_medium=member_android" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.49 6S0 4.88 0 3.5 1.11 1 2.49 1s2.49 1.12 2.49 2.5zM.5 8.75h4V23h-4V8.75zM8.5 8.75h3.83v1.96h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V23h-4v-6.63c0-1.58-.03-3.6-2.2-3.6-2.2 0-2.54 1.72-2.54 3.49V23h-4V8.75z"/></svg></a>
+          <a href="https://www.instagram.com/dnypi?stkn=c2t2Z3d1OHlhZDhv" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm0 2h10c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3zm11 1.5a1 1 0 100 2 1 1 0 000-2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6z"/></svg></a>
+          <a href="https://www.linkedin.com/in/pise?utm_source=share_via&utm_content=profile&utm_medium=member_android" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.49 6S0 4.88 0 3.5 1.11 1 2.49 1s2.49 1.12 2.49 2.5zM.5 8.75h4V23h-4V8.75zM8.5 8.75h3.83v1.96h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V23h-4v-6.63c0-1.58-.03-3.6-2.2-3.6-2.2 0-2.54 1.72-2.54 3.49V23h-4V8.75z"/></svg></a>
         </div>
       </div>
         </div>
@@ -752,64 +824,64 @@
       <div class="member" data-quote="Every failed test run taught us something the datasheet never did.">
         <div class="photo"><img src="SANJYOT.png" alt="Sanjyot Kawale" loading="lazy"></div><h4>Sanjyot Kawale</h4>
         <div class="socials">
-          <a href="https://www.instagram.com/sanjyot_kawale?stkn=MTIxcDFiNDNoZzhmeQ==" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm0 2h10c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3zm11 1.5a1 1 0 100 2 1 1 0 000-2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6z"/></svg></a>
-          <a href="https://www.linkedin.com/in/sanjyot-kawale-189a14132?utm_source=share_via&utm_content=profile&utm_medium=member_android" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.49 6S0 4.88 0 3.5 1.11 1 2.49 1s2.49 1.12 2.49 2.5zM.5 8.75h4V23h-4V8.75zM8.5 8.75h3.83v1.96h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V23h-4v-6.63c0-1.58-.03-3.6-2.2-3.6-2.2 0-2.54 1.72-2.54 3.49V23h-4V8.75z"/></svg></a>
+          <a href="https://www.instagram.com/sanjyot_kawale?stkn=MTIxcDFiNDNoZzhmeQ==" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm0 2h10c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3zm11 1.5a1 1 0 100 2 1 1 0 000-2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6z"/></svg></a>
+          <a href="https://www.linkedin.com/in/sanjyot-kawale-189a14132?utm_source=share_via&utm_content=profile&utm_medium=member_android" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.49 6S0 4.88 0 3.5 1.11 1 2.49 1s2.49 1.12 2.49 2.5zM.5 8.75h4V23h-4V8.75zM8.5 8.75h3.83v1.96h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V23h-4v-6.63c0-1.58-.03-3.6-2.2-3.6-2.2 0-2.54 1.72-2.54 3.49V23h-4V8.75z"/></svg></a>
         </div>
       </div>
       <div class="member" data-quote="Titans isn't a team you join, it's a habit of showing up at 2am for one more debug.">
         <div class="photo"><img src="DEEPANSHU.png" alt="Deepanshu Pise" loading="lazy"></div><h4>Deepanshu Pise</h4>
         <div class="socials">
-          <a href="https://www.instagram.com/deepanshuu.txtt?stkn=OTRoODd1amRqanln" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm0 2h10c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3zm11 1.5a1 1 0 100 2 1 1 0 000-2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6z"/></svg></a>
-          <a href="https://www.linkedin.com/in/deepanshu-pise-6869a72b2?utm_source=share_via&utm_content=profile&utm_medium=member_android" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.49 6S0 4.88 0 3.5 1.11 1 2.49 1s2.49 1.12 2.49 2.5zM.5 8.75h4V23h-4V8.75zM8.5 8.75h3.83v1.96h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V23h-4v-6.63c0-1.58-.03-3.6-2.2-3.6-2.2 0-2.54 1.72-2.54 3.49V23h-4V8.75z"/></svg></a>
+          <a href="https://www.instagram.com/deepanshuu.txtt?stkn=OTRoODd1amRqanln" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm0 2h10c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3zm11 1.5a1 1 0 100 2 1 1 0 000-2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6z"/></svg></a>
+          <a href="https://www.linkedin.com/in/deepanshu-pise-6869a72b2?utm_source=share_via&utm_content=profile&utm_medium=member_android" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.49 6S0 4.88 0 3.5 1.11 1 2.49 1s2.49 1.12 2.49 2.5zM.5 8.75h4V23h-4V8.75zM8.5 8.75h3.83v1.96h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V23h-4v-6.63c0-1.58-.03-3.6-2.2-3.6-2.2 0-2.54 1.72-2.54 3.49V23h-4V8.75z"/></svg></a>
         </div>
       </div>
       <div class="member" data-quote="I came for the robots, I stayed for the people who never let a problem stay unsolved.">
         <div class="photo"><img src="ASHWINI.png" alt="Ashwini Gajbhiye" loading="lazy"></div><h4>Ashwini Gajbhiye</h4>
         <div class="socials">
-          <a href="https://www.instagram.com/ashwini.gajbhiye.3154?stkn=bWQ1dWx5MHRiM2t3" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm0 2h10c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3zm11 1.5a1 1 0 100 2 1 1 0 000-2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6z"/></svg></a>
-          <a href="https://www.linkedin.com/in/ashwini-gajbhiye-a3669320b?utm_source=share_via&utm_content=profile&utm_medium=member_android" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.49 6S0 4.88 0 3.5 1.11 1 2.49 1s2.49 1.12 2.49 2.5zM.5 8.75h4V23h-4V8.75zM8.5 8.75h3.83v1.96h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V23h-4v-6.63c0-1.58-.03-3.6-2.2-3.6-2.2 0-2.54 1.72-2.54 3.49V23h-4V8.75z"/></svg></a>
+          <a href="https://www.instagram.com/ashwini.gajbhiye.3154?stkn=bWQ1dWx5MHRiM2t3" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm0 2h10c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3zm11 1.5a1 1 0 100 2 1 1 0 000-2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6z"/></svg></a>
+          <a href="https://www.linkedin.com/in/ashwini-gajbhiye-a3669320b?utm_source=share_via&utm_content=profile&utm_medium=member_android" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.49 6S0 4.88 0 3.5 1.11 1 2.49 1s2.49 1.12 2.49 2.5zM.5 8.75h4V23h-4V8.75zM8.5 8.75h3.83v1.96h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V23h-4v-6.63c0-1.58-.03-3.6-2.2-3.6-2.2 0-2.54 1.72-2.54 3.49V23h-4V8.75z"/></svg></a>
         </div>
       </div>
       <div class="member" data-quote="Every award we've won started as a whiteboard sketch nobody thought would work.">
         <div class="photo"><img src="1RITIKA.png" alt="Ritika Meshram" loading="lazy"></div><h4>Ritika Meshram</h4>
         <div class="socials">
-          <a href="https://www.instagram.com/_me_ritika?stkn=MWYwYW8wcTIwOGZrNQ==" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm0 2h10c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3zm11 1.5a1 1 0 100 2 1 1 0 000-2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6z"/></svg></a>
+          <a href="https://www.instagram.com/_me_ritika?stkn=MWYwYW8wcTIwOGZrNQ==" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm0 2h10c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3zm11 1.5a1 1 0 100 2 1 1 0 000-2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6z"/></svg></a>
           <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.49 6S0 4.88 0 3.5 1.11 1 2.49 1s2.49 1.12 2.49 2.5zM.5 8.75h4V23h-4V8.75zM8.5 8.75h3.83v1.96h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V23h-4v-6.63c0-1.58-.03-3.6-2.2-3.6-2.2 0-2.54 1.72-2.54 3.49V23h-4V8.75z"/></svg></a>
         </div>
       </div>
       <div class="member" data-quote="The best part of Titans is that no idea gets dismissed until it's actually tested.">
         <div class="photo"><img src="1HARSH.png" alt="Harsh Chitmulwar" loading="lazy"></div><h4>Harsh Chitmulwar</h4>
         <div class="socials">
-          <a href="https://www.instagram.com/harsh_chitmulwar?stkn=ZnRmNmI5eXRtaXVx" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm0 2h10c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3zm11 1.5a1 1 0 100 2 1 1 0 000-2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6z"/></svg></a>
-          <a href="https://www.linkedin.com/in/harsh-chitmulwar-71b11b273?utm_source=share_via&utm_content=profile&utm_medium=member_android" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.49 6S0 4.88 0 3.5 1.11 1 2.49 1s2.49 1.12 2.49 2.5zM.5 8.75h4V23h-4V8.75zM8.5 8.75h3.83v1.96h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V23h-4v-6.63c0-1.58-.03-3.6-2.2-3.6-2.2 0-2.54 1.72-2.54 3.49V23h-4V8.75z"/></svg></a>
+          <a href="https://www.instagram.com/harsh_chitmulwar?stkn=ZnRmNmI5eXRtaXVx" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm0 2h10c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3zm11 1.5a1 1 0 100 2 1 1 0 000-2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6z"/></svg></a>
+          <a href="https://www.linkedin.com/in/harsh-chitmulwar-71b11b273?utm_source=share_via&utm_content=profile&utm_medium=member_android" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.49 6S0 4.88 0 3.5 1.11 1 2.49 1s2.49 1.12 2.49 2.5zM.5 8.75h4V23h-4V8.75zM8.5 8.75h3.83v1.96h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V23h-4v-6.63c0-1.58-.03-3.6-2.2-3.6-2.2 0-2.54 1.72-2.54 3.49V23h-4V8.75z"/></svg></a>
         </div>
       </div>
       <div class="member" data-quote="I joined for the robots, I stayed for a team that treats every failure as data.">
         <div class="photo"><img src="1JAY.png" alt="Jay Kahate" loading="lazy"></div><h4>Jay Kahate</h4>
         <div class="socials">
-          <a href="https://www.instagram.com/jay_kahate_?stkn=MTN0ZTZzOHo1OHg4Zg==" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm0 2h10c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3zm11 1.5a1 1 0 100 2 1 1 0 000-2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6z"/></svg></a>
-          <a href="https://www.linkedin.com/in/jay-kahate-096740200?utm_source=share_via&utm_content=profile&utm_medium=member_android" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.49 6S0 4.88 0 3.5 1.11 1 2.49 1s2.49 1.12 2.49 2.5zM.5 8.75h4V23h-4V8.75zM8.5 8.75h3.83v1.96h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V23h-4v-6.63c0-1.58-.03-3.6-2.2-3.6-2.2 0-2.54 1.72-2.54 3.49V23h-4V8.75z"/></svg></a>
+          <a href="https://www.instagram.com/jay_kahate_?stkn=MTN0ZTZzOHo1OHg4Zg==" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm0 2h10c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3zm11 1.5a1 1 0 100 2 1 1 0 000-2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6z"/></svg></a>
+          <a href="https://www.linkedin.com/in/jay-kahate-096740200?utm_source=share_via&utm_content=profile&utm_medium=member_android" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.49 6S0 4.88 0 3.5 1.11 1 2.49 1s2.49 1.12 2.49 2.5zM.5 8.75h4V23h-4V8.75zM8.5 8.75h3.83v1.96h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V23h-4v-6.63c0-1.58-.03-3.6-2.2-3.6-2.2 0-2.54 1.72-2.54 3.49V23h-4V8.75z"/></svg></a>
         </div>
       </div>
        <div class="member" data-quote="Every competition taught me more than a semester of lectures ever could.">
         <div class="photo"><img src="1AYUSHCH.png" alt="Ayush Chakole" loading="lazy"></div><h4>Ayush Chakole</h4>
         <div class="socials">
-          <a href="https://www.instagram.com/ayushchakole_26?stkn=aG55aWZ5YmFmaGE2" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm0 2h10c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3zm11 1.5a1 1 0 100 2 1 1 0 000-2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6z"/></svg></a>
-          <a href="https://www.linkedin.com/in/ayush-chakole-2a1853325?utm_source=share_via&utm_content=profile&utm_medium=member_android" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.49 6S0 4.88 0 3.5 1.11 1 2.49 1s2.49 1.12 2.49 2.5zM.5 8.75h4V23h-4V8.75zM8.5 8.75h3.83v1.96h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V23h-4v-6.63c0-1.58-.03-3.6-2.2-3.6-2.2 0-2.54 1.72-2.54 3.49V23h-4V8.75z"/></svg></a>
+          <a href="https://www.instagram.com/ayushchakole_26?stkn=aG55aWZ5YmFmaGE2" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm0 2h10c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3zm11 1.5a1 1 0 100 2 1 1 0 000-2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6z"/></svg></a>
+          <a href="https://www.linkedin.com/in/ayush-chakole-2a1853325?utm_source=share_via&utm_content=profile&utm_medium=member_android" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.49 6S0 4.88 0 3.5 1.11 1 2.49 1s2.49 1.12 2.49 2.5zM.5 8.75h4V23h-4V8.75zM8.5 8.75h3.83v1.96h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V23h-4v-6.63c0-1.58-.03-3.6-2.2-3.6-2.2 0-2.54 1.72-2.54 3.49V23h-4V8.75z"/></svg></a>
         </div>
       </div>
        <div class="member" data-quote="Every award on our shelf has a hundred small failures hiding behind it.">
         <div class="photo"><img src="1PADMESH.png" alt="Padmesh Kimmatkar" loading="lazy"></div><h4>Padmesh Kimmatkar</h4>
         <div class="socials">
-          <a href="https://www.instagram.com/padmeshkimmatkar?stkn=NXVnMjJjdDRuNnE=" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm0 2h10c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3zm11 1.5a1 1 0 100 2 1 1 0 000-2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6z"/></svg></a>
-          <a href="https://www.linkedin.com/in/padmesh-kimmatkar-73ab472a1?utm_source=share_via&utm_content=profile&utm_medium=member_android" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.49 6S0 4.88 0 3.5 1.11 1 2.49 1s2.49 1.12 2.49 2.5zM.5 8.75h4V23h-4V8.75zM8.5 8.75h3.83v1.96h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V23h-4v-6.63c0-1.58-.03-3.6-2.2-3.6-2.2 0-2.54 1.72-2.54 3.49V23h-4V8.75z"/></svg></a>
+          <a href="https://www.instagram.com/padmeshkimmatkar?stkn=NXVnMjJjdDRuNnE=" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm0 2h10c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3zm11 1.5a1 1 0 100 2 1 1 0 000-2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6z"/></svg></a>
+          <a href="https://www.linkedin.com/in/padmesh-kimmatkar-73ab472a1?utm_source=share_via&utm_content=profile&utm_medium=member_android" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.49 6S0 4.88 0 3.5 1.11 1 2.49 1s2.49 1.12 2.49 2.5zM.5 8.75h4V23h-4V8.75zM8.5 8.75h3.83v1.96h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V23h-4v-6.63c0-1.58-.03-3.6-2.2-3.6-2.2 0-2.54 1.72-2.54 3.49V23h-4V8.75z"/></svg></a>
         </div>
       </div>
       <div class="member" data-quote="Titans is where I learned that a working prototype beats a perfect plan.">
         <div class="photo"><img src="1JOE.png" alt="Joel Dubba" loading="lazy"></div><h4>Joel Dubba</h4>
         <div class="socials">
-          <a href="https://www.instagram.com/joel_dubba_?stkn=MXNtYzdhYTA4bnAwag==" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm0 2h10c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3zm11 1.5a1 1 0 100 2 1 1 0 000-2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6z"/></svg></a>
-          <a href="https://www.linkedin.com/in/joel-dubba-1610822a8?utm_source=share_via&utm_content=profile&utm_medium=member_android" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.49 6S0 4.88 0 3.5 1.11 1 2.49 1s2.49 1.12 2.49 2.5zM.5 8.75h4V23h-4V8.75zM8.5 8.75h3.83v1.96h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V23h-4v-6.63c0-1.58-.03-3.6-2.2-3.6-2.2 0-2.54 1.72-2.54 3.49V23h-4V8.75z"/></svg></a>
+          <a href="https://www.instagram.com/joel_dubba_?stkn=MXNtYzdhYTA4bnAwag==" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm0 2h10c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3zm11 1.5a1 1 0 100 2 1 1 0 000-2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6z"/></svg></a>
+          <a href="https://www.linkedin.com/in/joel-dubba-1610822a8?utm_source=share_via&utm_content=profile&utm_medium=member_android" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.49 6S0 4.88 0 3.5 1.11 1 2.49 1s2.49 1.12 2.49 2.5zM.5 8.75h4V23h-4V8.75zM8.5 8.75h3.83v1.96h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V23h-4v-6.63c0-1.58-.03-3.6-2.2-3.6-2.2 0-2.54 1.72-2.54 3.49V23h-4V8.75z"/></svg></a>
         </div>
       </div>
         </div>
@@ -828,7 +900,7 @@
     <div class="blog-grid">
       <div class="blog-card">
         <div class="thumb"><img src="https://static.startuptalky.com/2022/07/Times-of-India-Success-Story-StartupTalky--1-.jpg" alt="Times of India feature"></div>
-        <div class="body"><h3>Times of India</h3><a href="https://timesofindia.indiatimes.com/spotlight/harness-the-future-of-technology-with-ai-and-ml-mastery-from-this-programme-by-iitm-pravartak/articleshow/118107365.cms">Read article →</a></div>
+        <div class="body"><h3>Times of India</h3><a href="https://timesofindia.indiatimes.com/spotlight/harness-the-future-of-technology-with-ai-and-ml-mastery-from-this-programme-by-iitm-pravartak/articleshow/118107365.cms" target="_blank" rel="noopener noreferrer">Read article →</a></div>
       </div>
       <div class="blog-card">
         <div class="thumb"><img src="https://india.mom-gmr.org/uploads/tx_lfrogmom/media/16533-1592_import.png" alt="DD News feature"></div>
@@ -836,7 +908,7 @@
       </div>
       <div class="blog-card">
         <div class="thumb"><img src="https://pbs.twimg.com/profile_images/1036149834338643970/nDK8ZX-z_400x400.jpg" alt="The Hitavada feature"></div>
-        <div class="body"><h3>The Hitavada</h3><a href="https://www.thehitavada.com/Encyc/2025/7/13/Team-Titans-from-YCCE-enter-final-round-of-IRoC-U-2025.html">Read article →</a></div>
+        <div class="body"><h3>The Hitavada</h3><a href="https://www.thehitavada.com/Encyc/2025/7/13/Team-Titans-from-YCCE-enter-final-round-of-IRoC-U-2025.html" target="_blank" rel="noopener noreferrer">Read article →</a></div>
       </div>
     </div>
   </div>
@@ -897,9 +969,9 @@
       <div>
         <h4>Follow Us</h4>
         <ul>
-          <li><a href="https://www.instagram.com/team.titans.official">Instagram</a></li>
-          <li><a href="https://www.linkedin.com/company/team-titans-ycce-nagpur/">LinkedIn</a></li>
-          <li><a href="https://youtube.com/@teamtitans_16?si=li9EhjQguTffDjHD">YouTube</a></li>
+          <li><a href="https://www.instagram.com/team.titans.official" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+          <li><a href="https://www.linkedin.com/company/team-titans-ycce-nagpur/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+          <li><a href="https://youtube.com/@teamtitans_16?si=li9EhjQguTffDjHD" target="_blank" rel="noopener noreferrer">YouTube</a></li>
         </ul>
       </div>
     </div>
@@ -939,6 +1011,56 @@
 </div>
 
 <script>
+  // Intro splash banner
+  (function(){
+    const splash = document.getElementById('introSplash');
+    const banner = document.getElementById('introBanner');
+    if(!splash || !banner) return;
+
+    // Only show on a genuine fresh load or a manual refresh — never on
+    // back/forward navigation (e.g. returning from an Instagram/LinkedIn tab).
+    let navType = 'navigate';
+    try{
+      const navEntries = performance.getEntriesByType('navigation');
+      if(navEntries && navEntries.length){
+        navType = navEntries[0].type; // "navigate" | "reload" | "back_forward" | "prerender"
+      } else if(performance.navigation){
+        // Legacy fallback
+        navType = performance.navigation.type === 2 ? 'back_forward'
+                : performance.navigation.type === 1 ? 'reload' : 'navigate';
+      }
+    }catch(e){ /* default stays "navigate" */ }
+
+    if(navType === 'back_forward'){
+      splash.style.display = 'none';
+      document.body.classList.remove('intro-lock');
+    }
+
+    let dismissed = false;
+    function dismissIntro(){
+      if(dismissed) return;
+      dismissed = true;
+      splash.classList.add('closing');
+      document.body.classList.remove('intro-lock');
+      setTimeout(()=>{ splash.style.display = 'none'; }, 750);
+    }
+    splash.addEventListener('click', dismissIntro);
+    banner.addEventListener('keydown', (e)=>{
+      if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); dismissIntro(); }
+    });
+
+    // Safety net: if the page is restored from the back/forward cache
+    // (bfcache), make sure the splash never reappears over it.
+    window.addEventListener('pageshow', (e)=>{
+      if(e.persisted){
+        dismissed = true;
+        splash.classList.remove('closing');
+        splash.style.display = 'none';
+        document.body.classList.remove('intro-lock');
+      }
+    });
+  })();
+
   // Mobile Navigation Toggle
   document.getElementById('navToggle').addEventListener('click', function(){
     document.getElementById('navLinks').classList.toggle('open');
